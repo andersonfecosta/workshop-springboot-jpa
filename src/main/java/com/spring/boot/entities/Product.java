@@ -3,6 +3,7 @@ package com.spring.boot.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 @Entity
 @Table(name = "tb_product")
 public class Product {
@@ -23,7 +25,10 @@ public class Product {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
