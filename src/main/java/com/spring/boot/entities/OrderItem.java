@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 
     @EmbeddedId
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;

@@ -13,7 +13,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -34,7 +36,7 @@ public class Order {
     private User client;
 
     @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER)
-    private Set<OrderItem> items = new HashSet<>();
+    private List<OrderItem> items = new ArrayList<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
