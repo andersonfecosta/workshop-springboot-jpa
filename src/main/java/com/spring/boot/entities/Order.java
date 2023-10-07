@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order")
@@ -37,6 +36,9 @@ public class Order {
 
     @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER)
     private List<OrderItem> items = new ArrayList<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
